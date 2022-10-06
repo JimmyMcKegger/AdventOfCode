@@ -2,16 +2,6 @@
 import re
 INPUT_FILE = "day_4_input.txt"
 
-class Num:
-    def __init__(self, n):
-        self.val = n
-    
-    def __repr__(self):
-        return str(self.val)
-    
-    def __str__(self):
-        return str(self.val)
-
 class Board:
     def __init__(self, input_lines):
         self.total_value = 0
