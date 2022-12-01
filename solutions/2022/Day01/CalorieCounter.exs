@@ -33,3 +33,8 @@ defmodule CalorieCounting do
   end
 
 end
+
+p1 = CalorieCounting.part1 "input.txt"
+p2 = CalorieCounting.part2 "input.txt"
+
+IO.puts ~s/Part 1: #{p1}\nPart 2: #{p2}/
