@@ -3,18 +3,16 @@ defmodule RPS do
   @player %{"X" => :rock, "Y" => :paper, "Z" => :scissors}
   @shape_value %{rock: 1, paper: 2, scissors: 3}
 
-  def part1(file) do
-    file
-    |> readlines
+  def part1(input) do
+    readlines(input)
     |> Enum.reduce(0, fn round, acc ->
       [choice, guess] = round
       acc + @shape_value[@player[guess]] + score(@elf[choice], @player[guess])
     end)
   end
 
-  def part2(file) do
-    file
-    |> readlines
+  def part2(input) do
+    readlines(input)
     |> Enum.reduce(0, fn round, acc ->
       [choice, strategy] = round
       my_pick = find_my_pick(@elf[choice], strategy)
@@ -22,13 +20,13 @@ defmodule RPS do
     end)
   end
 
-  defp readlines(f) do
-    File.read!(f)
-    |> String.split("\n")
-    |> Enum.map(fn row ->
-      String.split(row, " ")
-    end)
-  end
+  defp score(opp, pl) when opp == pl, do: 3
+  defp score(:rock, :paper), do: 6
+  defp score(:rock, :scissors), do: 0
+  defp score(:paper, :scissors), do: 6
+  defp score(:paper, :rock), do: 0
+  defp score(:scissors, :rock), do: 6
+  defp score(:scissors, :paper), do: 0
 
   defp find_my_pick(ec, "Y"), do: ec
   defp find_my_pick(ec, "X") when ec == :rock, do: :scissors
@@ -38,13 +36,11 @@ defmodule RPS do
   defp find_my_pick(ec, "Z") when ec == :paper, do: :scissors
   defp find_my_pick(ec, "Z") when ec == :scissors, do: :rock
 
-  defp score(opp, pl) when opp == pl, do: 3
-  defp score(:rock, :paper), do: 6
-  defp score(:rock, :scissors), do: 0
-  defp score(:paper, :rock), do: 0
-  defp score(:paper, :scissors), do: 6
-  defp score(:scissors, :rock), do: 6
-  defp score(:scissors, :paper), do: 0
+  defp readlines(f) do
+    File.read!(f)
+    |> String.split("\n")
+    |> Enum.map(fn row -> String.split(row) end)
+  end
 end
 
 p1 = RPS.part1 "input.txt"
