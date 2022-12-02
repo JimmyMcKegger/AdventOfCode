@@ -22,9 +22,8 @@ defmodule RPS do
     end)
   end
 
-  defp readlines(file) do
-    file
-    |> File.read!()
+  defp readlines(f) do
+    File.read!(f)
     |> String.split("\n")
     |> Enum.map(fn row ->
       String.split(row, " ")
