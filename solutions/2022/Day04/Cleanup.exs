@@ -4,12 +4,14 @@ defmodule Cleanup do
   """
 
   def part1(file) do
-    sections(file)
+    file
+    |> sections
     |> count_fully_overlapping
   end
 
   def part2(file) do
-    sections(file)
+    file
+    |> sections
     |> count_any_overlapping
   end
 
@@ -54,9 +56,8 @@ defmodule Cleanup do
 
   defp to_range(line) do
     [a, b, c, d] = line
-    r1 = Range.new(a, b)
-    r2 = Range.new(c, d)
-    {{a, b, c, d}, {r1, r2}}
+
+    {{a, b, c, d}, {Range.new(a, b), Range.new(c, d)}}
   end
 end
 
