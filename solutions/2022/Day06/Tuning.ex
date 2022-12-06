@@ -1,12 +1,6 @@
 defmodule Tuning do
   @moduledoc """
   Solution for Advent of Code 2022 day 6.
-
-  ## Examples
-
-      iex> Tuning.part1 "sample.txt"
-      7
-
   """
 
   def part1(file),
