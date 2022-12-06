@@ -2,18 +2,20 @@ defmodule Crates do
   def part1(file) do
     {stacks, moves} = init(file)
 
-    Enum.reduce(moves, stacks, fn x, acc ->
+    moves
+    |> Enum.reduce(stacks, fn x, acc ->
       play({acc, x}, 9000)
-    end)
+      end)
     |> tops
   end
 
   def part2(file) do
     {stacks, moves} = init(file)
 
-    Enum.reduce(moves, stacks, fn x, acc ->
+    moves
+    |> Enum.reduce(stacks, fn x, acc ->
       play({acc, x}, 9001)
-    end)
+      end)
     |> tops
   end
 
@@ -31,19 +33,25 @@ defmodule Crates do
 
     start_to = Map.fetch!(stacks, to)
     to_add_to = reverse?(to_add_to, model)
-    new_to = [to_add_to | start_to] |> List.flatten
+    new_to = List.flatten([to_add_to | start_to])
 
     # update to and from stacks
-    Map.put(stacks, from, new_from) |> Map.put(to, new_to)
+    stacks
+    |> Map.put(from, new_from) 
+    |> Map.put(to, new_to)
   end
 
   def init(f) do
-    [crates, moves] = File.read!(f) |> String.split("\n\n")
+    [crates, moves] = 
+      f
+      |> File.read!
+      |> String.split("\n\n")
 
     supply_stack = zip_build(crates)
 
     moves =
-      String.split(moves, "\n")
+      moves
+      |> String.split("\n")
       |> Enum.map(fn line ->
         Regex.scan(~r/\d+/, line)
         |> List.flatten()
@@ -54,7 +62,8 @@ defmodule Crates do
   end
 
   defp zip_build(stack) do
-      String.split(stack, "\n")
+      stack
+      |> String.split("\n")
       |> Enum.map(fn str -> String.to_charlist(str) end)
       |> Enum.drop(-1)
       |> Enum.map(fn chrs -> Enum.chunk_every(chrs, 3, 4) end)
@@ -65,8 +74,8 @@ defmodule Crates do
         |> Enum.map(fn x ->
           str = List.to_string(x)
           hd(Regex.run(~r/\w/, str))
+          end)
         end)
-      end)
       |> map_maker
   end
 
