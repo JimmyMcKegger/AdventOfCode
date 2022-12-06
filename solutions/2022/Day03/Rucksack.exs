@@ -5,7 +5,8 @@ defmodule Rucksack do
 
   @spec part1(String.t()) :: integer
   def part1(file) do
-    compartments(file)
+    file
+    |> compartments
     |> Enum.reduce(0, fn x, acc ->
       {str1, str2} = x
       myers = String.myers_difference(str1, str2)
@@ -17,7 +18,8 @@ defmodule Rucksack do
 
   @spec part2(String.t()) :: integer
   def part2(file) do
-    threes(file)
+    file
+    |> threes
     |> Enum.reduce(0, fn x, acc ->
       [a, b, c] = x
       base_string = String.split(a, "", trim: true)
