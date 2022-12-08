@@ -101,5 +101,5 @@ for y, row in enumerate(arr):
 
 
 if __name__ == "__main__":
-    print(f"Final count visible form outsidez: {count}")
+    print(f"Final count visible form outside: {count}")
     print(f"Highest possible Scenic score: {max(viewscores)}")
