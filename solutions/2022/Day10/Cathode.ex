@@ -1,6 +1,6 @@
 defmodule Cathode do
   
-  def part1(f) do
+  def solve(f) do
     f
     |> File.read!
     |> String.split("\n")
