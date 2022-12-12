@@ -19,8 +19,8 @@ class Monkey:
         new = eval(self.operation)
         self.inspect_count += 1
         relived_third = new // 3
-        x = self.true if new % self.divisor == 0 else self.false
-        return relived_third, x
+        next_monkey = self.true if new % self.divisor == 0 else self.false
+        return relived_third, next_monkey
 
 
 def main():
