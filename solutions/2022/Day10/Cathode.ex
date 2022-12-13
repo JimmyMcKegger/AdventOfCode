@@ -1,13 +1,13 @@
 defmodule Cathode do
   
-  def solve(f) do
-    f
-    |> File.read!
-    |> String.split("\n")
-    |> Enum.reduce({1, 1, 0, ""}, &cycle(&1, &2))
-    |> IO.inspect(label: "part one")
-    |> pixel_print
-  end
+  def solve(f), 
+    do:
+      f
+      |> File.read!
+      |> String.split("\n")
+      |> Enum.reduce({1, 1, 0, ""}, &cycle(&1, &2))
+      |> IO.inspect(label: "part one")
+      |> pixel_print
 
   def cycle(line, {i, x, signal_sum, pixel_string}) do
     signal_sum = signal_sum + ss_finder(i, x)
